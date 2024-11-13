@@ -1,4 +1,4 @@
-import { ChangeEventHandler, MouseEventHandler } from 'react'
+import { ChangeEventHandler, MouseEventHandler, useState } from 'react'
 
 import ErrorMessage from './ErrorMessage'
 import IconButton from './IconButton'
@@ -24,15 +24,33 @@ const TextField = ({
   placeholder,
   isError
 }: TextFieldProps) => {
+  const [isFocused, setIsFocused] = useState(false)
+  const borderColor = isFocused
+    ? 'border-secondary'
+    : !value
+      ? 'border-mono300'
+      : 'border-primary'
   return (
     <div>
-      <input
-        type="text"
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-      />
-      <IconButton onClick={onClick} alt={iconAlt} iconPath={iconPath} />
+      <div
+        className={`
+        border-b 
+      text-primary 
+        ${borderColor}`}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+      >
+        <input
+          className="outline-none"
+          type="text"
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+        />
+        {!!value && (
+          <IconButton onClick={onClick} alt={iconAlt} iconPath={iconPath} />
+        )}
+      </div>
       {isError && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </div>
   )
