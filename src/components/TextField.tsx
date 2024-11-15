@@ -12,6 +12,7 @@ type TextFieldProps = {
   onChange: ChangeEventHandler<HTMLInputElement>
   value: string
   isError: boolean
+  id: string
 }
 
 const TextField = ({
@@ -22,7 +23,8 @@ const TextField = ({
   onChange,
   value,
   placeholder,
-  isError
+  isError,
+  id
 }: TextFieldProps) => {
   const [isFocused, setIsFocused] = useState(false)
   const borderColor = isFocused
@@ -31,7 +33,7 @@ const TextField = ({
       ? 'border-mono300'
       : 'border-primary'
   return (
-    <div>
+    <div className="relative">
       <div
         className={`
         border-b 
@@ -41,6 +43,7 @@ const TextField = ({
         onBlur={() => setIsFocused(false)}
       >
         <input
+          id={id}
           className="outline-none"
           type="text"
           placeholder={placeholder}
@@ -51,7 +54,11 @@ const TextField = ({
           <IconButton onClick={onClick} alt={iconAlt} iconPath={iconPath} />
         )}
       </div>
-      {isError && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      {isError && (
+        <div className="absolute">
+          <ErrorMessage>{errorMessage}</ErrorMessage>
+        </div>
+      )}
     </div>
   )
 }

@@ -23,6 +23,10 @@ const meta = {
     isError: {
       control: 'boolean',
       description: '에러 상태 여부'
+    },
+    id: {
+      control: 'text',
+      description: '텍스트 필드의 id'
     }
   }
 } satisfies Meta<typeof TextField>
@@ -39,6 +43,7 @@ export const Default: Story = {
     value: '',
     placeholder: '텍스트를 입력해주세요',
     errorMessage: '텍스트를 확인해주세요',
-    isError: false
+    isError: false,
+    id: 'email'
   }
 }

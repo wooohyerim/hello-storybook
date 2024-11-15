@@ -13,3 +13,9 @@
 body {
   font-family: "Roboto";
 }
+
+@layer components {
+  .navigation-title-wrapper > button {
+    @apply mr-[7px];
+  }
+}
